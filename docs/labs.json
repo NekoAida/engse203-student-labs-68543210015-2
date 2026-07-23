@@ -22,7 +22,7 @@
     "sourceOrigin": "migrated-repository",
     "originalRepoUrl": "https://github.com/NekoAida/engse203-lab02-68543210015-2",
     "originalCommit": "abc1234",
-    "pullRequestUrl": "https://github.com/NekoAida/engse203-student-labs-68543210015-2/compare/lab/week-02?expand=1",
+    "pullRequestUrl": "https://github.com/NekoAida/engse203-student-labs-68543210015-2/pull/2",
     "submissionTag": "lab-02-submission-v1",
     "testStatus": "pass",
     "notes": "นำ Vite build output ที่มี index.html เข้า publish/",
