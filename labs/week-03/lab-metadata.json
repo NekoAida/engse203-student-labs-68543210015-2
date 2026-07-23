@@ -1,12 +1,12 @@
 {
   "week": "week-03",
   "title": "Responsive Web UI & Form Interaction",
-  "status": "draft",
-  "sourceOrigin": "course-starter",
-  "originalRepoUrl": "",
-  "originalCommit": "",
+  "status": "ready",
+  "sourceOrigin": "migrated-repository",
+  "originalRepoUrl": "https://github.com/NekoAida/engse203-lab03-68543210015-2/tree/main",
+  "originalCommit": "abc1234",
   "pullRequestUrl": "",
   "submissionTag": "",
-  "testStatus": "not-tested",
+  "testStatus": "pass",
   "notes": "Static site ต้องมี index.html ที่ publish root"
 }
