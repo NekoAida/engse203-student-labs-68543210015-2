@@ -5,7 +5,7 @@
 | รายวิชา | ENGSE203 การเขียนโปรแกรมสำหรับวิศวกรซอฟต์แวร์ |
 | รหัสนักศึกษา | 68543210015 |
 | ชื่อ-นามสกุล | ปริษฎา สุทธดุก |
-| Section | SEC1 |
+| Section | SEC2 |
 | GitHub Username | NekoAida |
 | Repository | `engse203-student-labs-68543210015` |
 | Mode | `migration` |

@@ -1,0 +1,12 @@
+{
+  "name": "engse203",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/hello.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
