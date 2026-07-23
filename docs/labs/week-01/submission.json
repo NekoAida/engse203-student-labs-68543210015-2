@@ -5,7 +5,7 @@
   "sourceOrigin": "migrated-repository",
   "originalRepoUrl": "https://github.com/NekoAida/engse203-lab01--68543210015-2-",
   "originalCommit": "abc1234",
-  "pullRequestUrl": "gh pr checkout 1",
+  "pullRequestUrl": "https://github.com/NekoAida/engse203-student-labs-68543210015-2/pull/1",
   "submissionTag": "lab-01-submission-v1",
   "testStatus": "pass",
   "notes": "รัน hello.js และตรวจ environment แล้ว",
