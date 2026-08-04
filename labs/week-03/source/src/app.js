@@ -1,95 +1,116 @@
-const form = document.querySelector("#profile-form");
-const status = document.querySelector("#form-status");
-const goalCount = document.querySelector("#goal-count");
+﻿import './style.css';
 
+const form = document.querySelector('#request-form');
+const status = document.querySelector('#form-status');
+const requestList = document.querySelector('#request-list');
+
+// TODO 1: query preview/status/list elements
 const preview = {
-  displayName: document.querySelector("#preview-name"),
-  learningRole: document.querySelector("#preview-role"),
-  learningGoal: document.querySelector("#preview-goal"),
+  requesterName: document.querySelector('#preview-name'),
+  requestType: document.querySelector('#preview-type'),
+  details: document.querySelector('#preview-details'),
 };
 
+const fields = {
+  requesterName: document.querySelector('#requester-name'),
+  requestType: document.querySelector('#request-type'),
+  details: document.querySelector('#request-details'),
+};
+
+const errorMessages = {
+  requesterName: document.querySelector('#requester-name-error'),
+  requestType: document.querySelector('#request-type-error'),
+  details: document.querySelector('#request-details-error'),
+};
+
+// TODO 2: readForm()
 function readForm() {
-  // TODO 5: คืนค่า Object จาก FormData
   return Object.fromEntries(new FormData(form).entries());
 }
 
+// TODO 3: renderPreview(data)
 function renderPreview(data) {
-  // TODO 6: อัปเดต preview ทั้ง 3 ค่าโดยใช้ textContent
-  preview.displayName.textContent = data.displayName.trim() || "ยังไม่ระบุชื่อ";
-  preview.learningRole.textContent = data.learningRole || "ยังไม่เลือกบทบาท";
-  preview.learningGoal.textContent = data.learningGoal.trim() || "ยังไม่มีเป้าหมายการเรียนรู้";
-  goalCount.textContent = `${data.learningGoal.length} ตัวอักษร`;
+  preview.requesterName.textContent = data.requesterName?.trim() || 'ยังไม่ระบุชื่อ';
+  preview.requestType.textContent = data.requestType || 'ยังไม่เลือกประเภท';
+  preview.details.textContent = data.details?.trim() || 'ยังไม่มีรายละเอียด';
 }
 
+// TODO 4: validate(data)
 function validate(data) {
-  // TODO 7: ตรวจชื่อ >= 2, role ต้องเลือก, goal >= 10
   const errors = {};
 
-  if (data.displayName.trim().length < 2) {
-    errors.displayName = "กรุณากรอกชื่ออย่างน้อย 2 ตัวอักษร";
+  if (!data.requesterName?.trim()) {
+    errors.requesterName = 'Requester Name is required.';
   }
 
-  if (!data.learningRole) {
-    errors.learningRole = "กรุณาเลือกบทบาทที่สนใจ";
+  if (!data.requestType) {
+    errors.requestType = 'Request Type is required.';
   }
 
-  if (data.learningGoal.trim().length < 10) {
-    errors.learningGoal = "กรุณาเขียนเป้าหมายอย่างน้อย 10 ตัวอักษร";
+  if (!data.details?.trim()) {
+    errors.details = 'Details are required.';
   }
 
   return errors;
 }
 
+// TODO 5: renderErrors(errors)
 function renderErrors(errors) {
-  // TODO 8: แสดง error ใกล้ field และกำหนด aria-invalid
-  for (const name of ["displayName", "learningRole", "learningGoal"]) {
-    const field = form.elements[name];
-    const output = document.querySelector(`#${name}-error`);
-    const message = errors[name] ?? "";
+  Object.keys(fields).forEach((name) => {
+    const message = errors[name] || '';
 
-    output.textContent = message;
-    field.setAttribute("aria-invalid", String(Boolean(message)));
-  }
+    fields[name].setAttribute('aria-invalid', message ? 'true' : 'false');
+    errorMessages[name].textContent = message;
+  });
 }
 
-form.addEventListener("input", () => {
-  // TODO 9: Read → Render
-    const data = readForm();
-    renderPreview(data);
+function clearStatus() {
+  status.textContent = '';
+  status.className = 'status';
+}
+
+function setStatus(message, type) {
+  status.textContent = message;
+  status.className = `status status-${type}`;
+}
+
+function addSubmittedRequest(data) {
+  const item = document.createElement('li');
+  const title = document.createElement('strong');
+  const details = document.createElement('p');
+
+  title.textContent = `${data.requesterName.trim()} - ${data.requestType}`;
+  details.textContent = data.details.trim();
+
+  item.append(title, details);
+  requestList.prepend(item);
+}
+
+// TODO 6: input and submit listeners
+form.addEventListener('input', () => {
+  renderPreview(readForm());
+  clearStatus();
 });
 
-form.addEventListener("submit", (event) => {
+form.addEventListener('submit', (event) => {
   event.preventDefault();
-  // TODO 10: Read → Validate → Render errors/status
+
   const data = readForm();
   const errors = validate(data);
+
   renderErrors(errors);
 
   if (Object.keys(errors).length > 0) {
-    renderStatus("invalid", "ยังบันทึกไม่ได้ กรุณาตรวจสอบข้อมูล");
-    form.querySelector('[aria-invalid="true"]')?.focus();
+    const firstInvalidField = Object.keys(fields).find((name) => errors[name]);
+
+    setStatus('Please complete the required fields.', 'error');
+    fields[firstInvalidField]?.focus();
     return;
   }
 
-  renderStatus(
-    "success",
-    `พร้อมแล้ว ${data.displayName}! ข้อมูลผ่านการตรวจสอบ`,
-  );
+  addSubmittedRequest(data);
+  setStatus('Request submitted successfully.', 'success');
+  form.reset();
+  renderPreview(readForm());
+  renderErrors({});
 });
-
-function renderStatus(state, message) {
-  status.dataset.state = state;
-  status.textContent = message;
-}
-
-form.addEventListener("reset", () => {
-  queueMicrotask(() => {
-    // TODO 11: reset preview, errors และ status
-    renderErrors({});
-    renderPreview(readForm());
-    renderStatus('idle', 'พร้อมกรอกข้อมูลใหม่');
-  });
-});
-
-renderPreview(readForm());
-renderStatus('idle', 'เริ่มพิมพ์เพื่อทดลอง Event และ Live Preview');
