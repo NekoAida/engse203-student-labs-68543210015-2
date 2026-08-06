@@ -6,7 +6,7 @@
   "originalRepoUrl": "",
   "originalCommit": "",
   "pullRequestUrl": "https://github.com/NekoAida/engse203-student-labs-68543210015-2/pull/5",
-  "submissionTag": "",
+  "submissionTag": "lab-04-submission-v1",
   "testStatus": "pass",
   "notes": "React/Vite build output ต้องอยู่ใน publish/ ก่อนสร้าง Pages Hub"
 }
