@@ -47,8 +47,12 @@ async function waitForLabDelay() {
  * ถ้าคืนตัวเดิมไปตรง ๆ แล้วมีคนแก้ ข้อมูลต้นทางจะเปลี่ยนตามโดยไม่ตั้งใจ
  */
 async function fetchSeedRequests() {
-  throw new Error('TODO 5A-1: fetchSeedRequests');
+  const baseUrl = import.meta.env?.BASE_URL ?? '/';
+  const response = await fetch(`${baseUrl}data/initialRequests.json`);
+  if (!response.ok) throw new Error('ไม่สามารถโหลดข้อมูลตัวอย่างได้');
+  return structuredClone(await response.json());
 }
+
 
 /**
  * TODO 5A-2 · ทำให้ getRequests() คืนข้อมูลได้
@@ -70,7 +74,8 @@ export async function getRequests(options = {}) {
 
   // TODO 5A-2: return fetchSeedRequests();
   // TODO 5B-3: เปลี่ยนบรรทัดข้างบนเป็น return loadNormalRequests(options.onRecovery);
-  throw new Error('TODO 5A-2: getRequests normal flow');
+  //throw new Error('TODO 5A-2: getRequests normal flow');
+  return fetchSeedRequests();
 }
 
 /**
@@ -81,8 +86,8 @@ export async function getRequests(options = {}) {
  * เพราะ "หาไม่เจอ" ไม่ใช่ความผิดพลาดของระบบ
  */
 export async function getRequestById(requestId) {
-  void requestId;
-  throw new Error('TODO 5A-3: getRequestById');
+  const requests = await getRequests();
+  return requests.find((request) => request.id === requestId) ?? null;
 }
 
 /* ─────────── คาบ 5B ─────────── */
