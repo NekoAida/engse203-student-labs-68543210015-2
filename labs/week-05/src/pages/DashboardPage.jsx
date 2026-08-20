@@ -46,10 +46,21 @@ function DashboardPage() {
     else reload();
   }
 
-  function handleDelete(requestId) {
-  setRequests((current) => current.filter((request) => request.id !== requestId));
-  setNotice(`ลบคำร้อง ${requestId} ในหน่วยความจำแล้ว — refresh จะกลับมา`);
-}
+  async function handleDelete(requestId) {
+    const next = await deleteRequest(requestId);
+    setRequests(next);
+    setNotice(`ลบคำร้อง ${requestId} แล้ว`);
+  }
+
+  async function handleReset() {
+    if (!window.confirm('คืนค่าข้อมูลตัวอย่างเริ่มต้น และลบคำร้องที่เพิ่มไว้ทั้งหมด?')) return;
+    const seedRequests = await resetRequests();
+    setRequests(seedRequests);
+    setStatusFilter('all');
+    setNotice('คืนค่าข้อมูลตัวอย่างเรียบร้อยแล้ว');
+  }
+
+
 
   useEffect(() => {
     setLoadState("loading");
@@ -62,21 +73,25 @@ function DashboardPage() {
         setLoadState("success");
       })
       .catch((error) => {
-      setErrorMessage(error instanceof Error ? error.message : 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ');
-      setLoadState('error');
-    });
+        setErrorMessage(error instanceof Error ? error.message : 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ');
+        setLoadState('error');
+      });
   }, [scenario, reloadKey]);
 
   return (
     <section data-testid="page-dashboard">
       <div className="page-heading">
-        <div>
-          <p className="eyebrow dark">CP01 · PAGE REFACTOR</p>
-          <h1>Campus Service Request</h1>
-          <p>ตรวจ add, filter, delete และ validation ว่ายังทำงานเหมือนเดิม</p>
-        </div>
+        <p className="eyebrow dark">CP01 · PAGE REFACTOR</p>
+        <h1>Campus Service Request</h1>
+        <p>ตรวจ add, filter, delete และ validation ว่ายังทำงานเหมือนเดิม</p>
       </div>
-      
+
+      <div>
+        <button className="button ghost" data-testid="reset-button" type="button" onClick={handleReset}>
+          Reset Demo Data
+        </button>
+      </div>
+
       {scenario && <p className="lab-scenario" role="status">LAB test scenario: {scenario}</p>}
       {notice && <p className="notice" role="status">{notice}</p>}
 
