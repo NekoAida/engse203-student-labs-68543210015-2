@@ -1,16 +1,13 @@
 import { useMemo, useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import useManualReload from '../hooks/useManualReload.js';
-//import initialRequests from '../../public/data/initialRequests.json';
 import FilterBar from '../components/FilterBar.jsx';
-//import RequestForm from '../components/RequestForm.jsx';
 import RequestList from '../components/RequestList.jsx';
 import SummaryPanel from '../components/SummaryPanel.jsx';
 import LoadingState from '../components/LoadingState.jsx';
 import ErrorState from '../components/ErrorState.jsx';
 
-import { getRequests } from '../services/requestService.js';
-getRequests().then((d) => console.log('ได้ข้อมูล', d.length, 'รายการ'));
+import { getRequests, deleteRequest, resetRequests } from '../services/requestService.js';
 
 function DashboardPage() {
   const [searchParams, setSearchParams] = useSearchParams();
