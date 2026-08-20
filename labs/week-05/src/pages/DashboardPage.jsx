@@ -60,19 +60,26 @@ function DashboardPage() {
 
 
   useEffect(() => {
+    let ignore = false;
     setLoadState("loading");
     setErrorMessage('');
     setNotice('');
 
-    getRequests({ scenario })
+    getRequests({ scenario, onRecovery: setNotice })
       .then((requests) => {
+        if (ignore) return;
         setRequests(requests);
         setLoadState("success");
       })
       .catch((error) => {
+        if (ignore) return;
         setErrorMessage(error instanceof Error ? error.message : 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ');
         setLoadState('error');
       });
+
+    return () => {
+      ignore = true;
+    };
   }, [scenario, reloadKey]);
 
   return (

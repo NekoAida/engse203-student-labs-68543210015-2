@@ -104,13 +104,16 @@ export async function getRequestById(requestId) {
  *   4. ถ้า status เป็น 'invalid' ให้เรียก onRecovery?.(ข้อความ) เพื่อให้หน้าจอแจ้งผู้ใช้
  *   5. คืนข้อมูล seed
  */
-async function loadNormalRequests() {
+async function loadNormalRequests(onRecovery) {
   const stored = readStoredRequests();
   if (stored.status === 'valid') return stored.requests;
 
   const seedRequests = await fetchSeedRequests();
   writeStoredRequests(seedRequests);
-  // TODO 5B-2b: แจ้งผู้ใช้เมื่อกู้ข้อมูลจากของเสีย (ทำใน CP04b)
+
+  if (stored.status === 'invalid') {
+    onRecovery?.('พบข้อมูลเดิมที่อ่านไม่ได้ ระบบจึงกู้ข้อมูลตัวอย่างให้แล้ว');
+  }
   return seedRequests;
 }
 
@@ -145,8 +148,7 @@ function createRequestId(requests) {
   do {
     const time = Date.now().toString(36).toUpperCase();
     const random = Math.random().toString(36).slice(2, 6).toUpperCase();
-    id = `REQ-
-time-{random}`;
+    id = `REQ-${time}-${random}`;
   } while (requests.some((request) => request.id === id));
   return id;
 }
