@@ -12,8 +12,22 @@ function RequestCard({ request, onDeleteRequest, onAcknowledge }) {
         <p><span className={`badge ${request.status}`}>{request.status}</span> · {request.priority}</p>
       </div>
       <div className="request-card-actions">
-        {/* TODO B3: เพิ่มปุ่ม "รับเรื่อง" ที่แสดงเฉพาะการ์ดสถานะ pending (เรียก onAcknowledge) */}
-        <button className="button danger" type="button" onClick={() => onDeleteRequest(request.id)} aria-label={`ลบคำร้อง ${request.id}`}>
+        {request.status === 'pending' && (
+          <button
+            className="button primary"
+            type="button"
+            onClick={() => onAcknowledge(request.id)}
+            aria-label={`รับเรื่อง ${request.id}`}
+          >
+            รับเรื่อง
+          </button>
+        )}
+        <button
+          className="button danger"
+          type="button"
+          onClick={() => onDeleteRequest(request.id)}
+          aria-label={`ลบคำร้อง ${request.id}`}
+        >
           ลบ
         </button>
       </div>
