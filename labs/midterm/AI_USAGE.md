@@ -1,6 +1,6 @@
 # AI Usage Log — สอบกลางภาค ENGSE203 (ภาคปฏิบัติ)
 
-**ชื่อ–นามสกุล:** ______________________ **รหัส:** ______________ **Sec:** 2 **ชุด:** B
+**ชื่อ–นามสกุล:** ปริษฎา สุทธดุก **รหัส:** 68543210015-2 **Sec:** 2 **ชุด:** B
 
 ---
 
@@ -45,7 +45,7 @@
 | 15:32 | B2 | วิธีแสดงข้อความเมื่อค้นหาแล้วไม่พบข้อมูลใน DashboardPage |  แนะนำให้ใช้ Ternary Operator ตรวจสอบเงื่อนไข searchText.trim() !== '' && filteredRequests.length === 0 เพื่อสลับแสดง <p> แจ้งเตือน แทนคอมโพเนนต์ <RequestList>  | นำไปครอบ <RequestList> ที่บรรทัด 128 ของ DashboardPage.jsx, ทดสอบพิมพ์ "zzz" แล้วขึ้นข้อความ "ไม่พบคำร้องที่ตรงกับการค้นหา" โดยแผงสรุปด้านบนยังคงนับจำนวนรวมเท่าเดิม |
 | 15:45 | B3 | วิธีเพิ่มปุ่ม "รับเรื่อง" ที่แสดงเฉพาะสถานะ pending และส่ง callback ไป Dashboard | แนะนำให้รับ prop onAcknowledge ใน RequestCard และใช้เงื่อนไข request.status === 'pending' เพื่อแสดงปุ่ม พร้อมส่งผ่าน prop จาก RequestList | เพิ่มปุ่ม "รับเรื่อง" ใน RequestCard.jsx โดยแสดงเฉพาะ pending และส่ง prop onAcknowledge ผ่าน RequestList.jsx ทดสอบแล้วการ์ด REQ-102, REQ-105 มีปุ่ม ส่วนการ์ดอื่นไม่มี |
 | 15:58 | B3 | แก้ TypeError: onAcknowledge is not a function ตอนกดปุ่มรับเรื่อง | อธิบายว่าเกิดจากยังไม่ได้ส่ง prop onAcknowledge={handleAcknowledge} เข้าไปที่ <RequestList /> ในหน้า DashboardPage.jsx ทำให้ค่าข้างในกลายเป็น undefined | เพิ่ม prop onAcknowledge={handleAcknowledge} ให้กับ <RequestList /> ใน DashboardPage.jsx ทดสอบกดรับเรื่องแล้วสถานะเปลี่ยนเป็น in-progress และแผงสรุปอัปเดตทันที |
-|  |  |  |  |  |
+| 16:30 | B4 | แนวทางการสร้างคอมโพเนนต์ StatusBadge และจัดการ Edge Case (B4.1 - B4.2) | แนะนำโครงสร้าง switch/mapping สำหรับแปลง 3 สถานะหลัก ชี้ว่าต้องใส่คลาส status-badge คู่กับคลาสสี และใส่ default คืนค่า 'ไม่ทราบสถานะ' (status-unknown) พร้อมแนะวิธีทดสอบด้วย cancelled | สร้างไฟล์ StatusBadge.jsx เขียน switch ให้ครอบคลุม 3 สถานะหลักและ default ใส่คลาสคู่กัน แล้วนำ <StatusBadge status="cancelled" /> ไปทดสอบในการ์ด พบว่าแสดงป้ายสีเทา 'ไม่ทราบสถานะ' ได้ถูกต้อง |
 |  |  |  |  |  |
 |  |  |  |  |  |
 |  |  |  |  |  |
@@ -58,4 +58,4 @@
 
 ฉันเข้าใจโค้ดทุกส่วนที่ส่ง และพร้อมอธิบายใน oral
 
-**ลงชื่อ:** ______________________
+**ลงชื่อ:** ปริษฎา สุทธดุก

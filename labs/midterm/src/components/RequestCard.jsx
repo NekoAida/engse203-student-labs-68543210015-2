@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import StatusBadge from './StatusBadge';
 
 function RequestCard({ request, onDeleteRequest, onAcknowledge }) {
   return (
@@ -8,8 +9,7 @@ function RequestCard({ request, onDeleteRequest, onAcknowledge }) {
         <h3><Link to={`/requests/${request.id}`}>{request.requestType}</Link></h3>
         <p>{request.location}</p>
         <p>{request.details}</p>
-        {/* TODO B4: แทน <span> สถานะดิบด้านล่างด้วย <StatusBadge status={request.status} /> ที่คุณสร้าง */}
-        <p><span className={`badge ${request.status}`}>{request.status}</span> · {request.priority}</p>
+        <p><StatusBadge status={request.status} /> · {request.priority} </p>
       </div>
       <div className="request-card-actions">
         {request.status === 'pending' && (
