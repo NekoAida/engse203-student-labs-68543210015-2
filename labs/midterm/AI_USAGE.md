@@ -42,7 +42,7 @@
 |  13:55 | B1 | ทำไมเวลาเพิ่ม key เข้าไปแล้ว error each child ถึงหายไป |  React ใช้ key เป็นตัวระบุเอกลักษณ์ (unique identifier) ของแต่ละ element ใน Virtual DOM เพื่อเปรียบเทียบ (Diffing) และติดตามการเปลี่ยนแปลง/ลบ/เพิ่มรายการได้อย่างถูกต้อง เมื่อใส่ครบ React รู้ตำแหน่ง จึงหยุดแจ้งเตือน | เช็คว่าเพิ่ม key เข้าไปใน summary panel ถูกจุด|
 |  14:30 | B1 | ปัญหาที่ 4 และ 6 อยู่ตรงไหน ไม่ต้องทำให้แค่บอกแนวทางมา" | ชี้เป้าว่าปัญหา 4 อยู่ที่ useEffect ใน RequestDetailPage.jsx ขาด dependency ส่วนปัญหา 6 อยู่ที่ handleDelete ใน DashboardPage.jsx ลืมใส่ await ก่อน deleteRequest | ตรวจสอบไฟล์จริง: เพิ่ม [requestId, reloadKey] ในหน้า Detail และใส่ await deleteRequest(...) ใน Dashboard จากนั้นทดสอบกดลบแล้วหน้าไม่พัง |
 | 15:15 | B2 | "ก้ Error request.category และทำช่องค้นหา Dashboard พร้อม empty state | ชี้ว่าฟิลด์คือ requestType ไม่ใช่ category และแนะนำให้ใช้ ?.toLowerCase().includes() ร่วมกับเงื่อนไขแสดง <p className="empty-state"> เมื่อ filteredRequests.length === 0 | แก้ไข request.category เป็น request.requestType ในฟังก์ชัน filter และเพิ่ม conditional rendering สำหรับ empty state |
-|  |  |  |  |  |
+| 15:32 | B2 | วิธีแสดงข้อความเมื่อค้นหาแล้วไม่พบข้อมูลใน DashboardPage |  แนะนำให้ใช้ Ternary Operator ตรวจสอบเงื่อนไข searchText.trim() !== '' && filteredRequests.length === 0 เพื่อสลับแสดง <p> แจ้งเตือน แทนคอมโพเนนต์ <RequestList>  | นำไปครอบ <RequestList> ที่บรรทัด 128 ของ DashboardPage.jsx, ทดสอบพิมพ์ "zzz" แล้วขึ้นข้อความ "ไม่พบคำร้องที่ตรงกับการค้นหา" โดยแผงสรุปด้านบนยังคงนับจำนวนรวมเท่าเดิม |
 |  |  |  |  |  |
 |  |  |  |  |  |
 |  |  |  |  |  |
