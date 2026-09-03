@@ -50,9 +50,20 @@ function DashboardPage() {
     completed: requests.filter((request) => request.status === 'completed').length,
   }), [requests]);
 
-  const filteredRequests = statusFilter === 'all'
-    ? requests
-    : requests.filter((request) => request.status === statusFilter);
+  const filteredRequests = useMemo(() => {
+    const query = searchText.trim().toLowerCase();
+
+    return requests.filter((request) => {
+      const statusMatch = statusFilter === 'all' || request.status === statusFilter;
+      if (query === '') return statusMatch;
+
+      const searchMatch =
+        (request.requestType?.toLowerCase().includes(query) ?? false) ||
+        (request.location?.toLowerCase().includes(query) ?? false);
+
+      return statusMatch && searchMatch;
+    });
+  }, [requests, statusFilter, searchText]);
 
   function handleRetry() {
     if (scenario) setSearchParams({});
@@ -105,7 +116,6 @@ function DashboardPage() {
               <h2 id="request-list-title">รายการคำร้อง</h2>
               <FilterBar value={statusFilter} onFilterChange={setStatusFilter} />
             </div>
-            {/* TODO B2: วางช่อง <input> ค้นหา ตรงนี้ (เหนือรายการ) แล้วกรองร่วมกับตัวกรองสถานะ ค้นจากประเภท/สถานที่ */}
             <div>
               <input
                 type="text"
