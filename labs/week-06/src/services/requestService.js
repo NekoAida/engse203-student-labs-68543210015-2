@@ -66,7 +66,10 @@ export function create(input) {
  * - ไม่พบคืน null · พบแล้วเปลี่ยน status และคืนสำเนา
  */
 export function updateStatus(id, status) {
-  throw new Error('TODO W06-S4: updateStatus');
+  const req = requests.find((r) => r.id === id);
+  if (!req) return null;
+  req.status = status;
+  return structuredClone(req);
 }
 
 /**

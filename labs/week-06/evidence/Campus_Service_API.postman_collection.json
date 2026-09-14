@@ -26,12 +26,21 @@
         "url": { "raw": "{{baseUrl}}/api/requests", "host": ["{{baseUrl}}"], "path": ["api","requests"] } } },
     { "name": "06 · DELETE /api/requests/REQ-003 (→ 204)",
       "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/requests/REQ-003", "host": ["{{baseUrl}}"], "path": ["api","requests","REQ-003"] } } },
+    { "name": "06b · DELETE /api/requests/REQ-999 (ไม่พบ → 404)",
+      "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/requests/REQ-999", "host": ["{{baseUrl}}"], "path": ["api","requests","REQ-999"] } } },
+    { "name": "06c · GET /api/unknown (ไม่พบเส้นทาง → 404)",
+      "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/unknown", "host": ["{{baseUrl}}"], "path": ["api","unknown"] } } },
     { "name": "07 · ⭐ GET /api/requests?status=pending (กรอง)",
       "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/requests?status=pending", "host": ["{{baseUrl}}"], "path": ["api","requests"], "query": [{ "key": "status", "value": "pending" }] } } },
-    { "name": "08 · ⭐ PUT /api/requests/REQ-001 (เปลี่ยนสถานะ)",
+    { "name": "08 · ⭐ PUT /api/requests/REQ-001 (เปลี่ยนสถานะ → 200)",
       "request": { "method": "PUT",
         "header": [{ "key": "Content-Type", "value": "application/json" }],
         "body": { "mode": "raw", "raw": "{\n  \"status\": \"in-progress\"\n}" },
+        "url": { "raw": "{{baseUrl}}/api/requests/REQ-001", "host": ["{{baseUrl}}"], "path": ["api","requests","REQ-001"] } } },
+    { "name": "09 · ⭐ PUT /api/requests/REQ-001 (status ไม่ถูกต้อง → 400)",
+      "request": { "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"status\": \"มั่ว\"\n}" },
         "url": { "raw": "{{baseUrl}}/api/requests/REQ-001", "host": ["{{baseUrl}}"], "path": ["api","requests","REQ-001"] } } }
   ]
 }
