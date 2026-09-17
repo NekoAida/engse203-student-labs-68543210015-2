@@ -33,7 +33,11 @@ function DashboardPage() {
       setLoadState('success');
     }).catch((error) => {
       if (ignore) return;
-      setErrorMessage(error instanceof Error ? error.message : 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ');
+      if (error instanceof Error && error.status === 0) {
+        setError('ติดต่อเซิร์ฟเวอร์ไม่ได้ — ตรวจว่าเปิด API ที่พอร์ต 3001 แล้วหรือยัง');
+      } else {
+        setError(error.message);
+      }
       setLoadState('error');
     });
 
