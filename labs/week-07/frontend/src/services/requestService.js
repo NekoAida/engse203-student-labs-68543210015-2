@@ -17,7 +17,9 @@ export { ApiError };
  *   ใช้ encodeURIComponent() ป้องกันอักขระพิเศษ
  */
 export async function getRequests(options = {}) {
-  throw new Error('TODO W07-F3: getRequests');
+  const response = await fetch('http://localhost:3001/api/requests');
+  return response.json();
+
 }
 
 /**
