@@ -2,6 +2,8 @@
 **/dist/
 **/.env
 **/.env.*
+# ยกเว้น .env.production ของ frontend — ไม่มีค่าลับ · ต้อง commit ให้ Render อ่านตอน build
+!**/frontend/.env.production
 .DS_Store
 Thumbs.db
 .vscode/
