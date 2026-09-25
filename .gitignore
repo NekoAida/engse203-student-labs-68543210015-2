@@ -2,6 +2,9 @@
 **/dist/
 **/.env
 **/.env.*
+# ยกเว้น .env.production ของ frontend และ .env.example ทั้งสองฝั่ง — ไม่มีค่าลับ
+!**/frontend/.env.production
+!labs/week-11/**/.env.example
 .DS_Store
 Thumbs.db
 .vscode/
