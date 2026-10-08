@@ -1,0 +1,16 @@
+{
+  "week": "week-13",
+  "title": "Software Quality & Security (Validation, scrypt, JWT & Authorization)",
+  "status": "ready",
+  "sourceOrigin": "course-starter",
+  "originalRepoUrl": "",
+  "originalCommit": "",
+  "pullRequestUrl": "",
+  "submissionTag": "",
+  "testStatus": "pass",
+  "notes": "Mandatory checker passed 23/23. Render generates JWT_SECRET for production.",
+  "pageUrl": "https://NekoAida.github.io/engse203-student-labs-68543210015-2/labs/week-13/",
+  "sourceUrl": "https://github.com/NekoAida/engse203-student-labs-68543210015-2/tree/lab/week-13/labs/week-13/source",
+  "hasPublish": false,
+  "sourceEntries": 18
+}

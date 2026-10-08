@@ -1,0 +1,12 @@
+{
+  "week": "week-13",
+  "title": "Software Quality & Security (Validation, scrypt, JWT & Authorization)",
+  "status": "ready",
+  "sourceOrigin": "course-starter",
+  "originalRepoUrl": "",
+  "originalCommit": "",
+  "pullRequestUrl": "",
+  "submissionTag": "",
+  "testStatus": "pass",
+  "notes": "Mandatory checker passed 23/23. Render generates JWT_SECRET for production."
+}
