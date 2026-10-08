@@ -3,13 +3,17 @@ import request from 'supertest';
 import { createApp } from '../../src/app.js';
 import { loadSeed } from '../../src/services/requestService.js';
 import { STAFF, loginAsStaff, tokenFor } from '../helpers/auth.js';
+import { resetLoginLimiter } from '../../src/routes/authRoutes.js';
 
 /**
  * Week 13 — เข้าสู่ระบบและสิทธิ์
  * test 3 ข้อแรกให้มาแล้ว — จะ fail จนกว่าจะทำ CP50–CP51 เสร็จ (เขียน test ก่อน แล้วทำให้ผ่าน)
  */
 const app = createApp();
-beforeEach(async () => { await loadSeed(); });
+beforeEach(async () => {
+  resetLoginLimiter();
+  await loadSeed();
+});
 
 describe('POST /api/auth/login', () => {
   test('อีเมลและรหัสผ่านถูก → 200 พร้อม token', async () => {
@@ -22,6 +26,12 @@ describe('POST /api/auth/login', () => {
     expect(r.status).toBe(401);
   });
   test('อีเมลไม่มี → ข้อความเดียวกับรหัสผิด', async () => { const a=await request(app).post('/api/auth/login').send({ ...STAFF,password:'nope1234' }); const b=await request(app).post('/api/auth/login').send({email:'none@example.com',password:'nope1234'}); expect(b.status).toBe(401); expect(b.body.error).toBe(a.body.error); });
+  test('ผิดเกิน 5 ครั้งใน 15 นาที → 429', async () => {
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      await request(app).post('/api/auth/login').send({ ...STAFF, password: 'nope1234' }).expect(401);
+    }
+    await request(app).post('/api/auth/login').send({ ...STAFF, password: 'nope1234' }).expect(429);
+  });
 
   // 🏫 TODO W13-LOGIN (CP50): อีเมลที่ไม่มี ต้องได้ข้อความ error เดียวกับรหัสผ่านผิด
 });

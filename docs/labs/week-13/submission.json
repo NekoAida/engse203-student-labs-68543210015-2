@@ -8,7 +8,7 @@
   "pullRequestUrl": "https://github.com/NekoAida/engse203-student-labs-68543210015-2/pull/19",
   "submissionTag": "lab-13-submission-v1",
   "testStatus": "pass",
-  "notes": "Mandatory checker passed 23/23. Render generates JWT_SECRET for production.",
+  "notes": "Week 13 checker passed 27/27, including all four security challenges. Render generates JWT_SECRET for production.",
   "pageUrl": "https://NekoAida.github.io/engse203-student-labs-68543210015-2/labs/week-13/",
   "sourceUrl": "https://github.com/NekoAida/engse203-student-labs-68543210015-2/tree/lab/week-13/labs/week-13/source",
   "hasPublish": false,
