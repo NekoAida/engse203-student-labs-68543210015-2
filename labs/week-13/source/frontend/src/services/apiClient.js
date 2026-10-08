@@ -30,10 +30,17 @@ async function parseError(response) {
  * - ต่อ API ไม่ได้เลย → โยน ApiError status 0
  */
 export async function apiFetch(path, options = {}) {
+  // Challenge: Term Project จะให้หน้า login เก็บ token ชื่อนี้ใน localStorage
+  // API client จึงแนบ token ให้ทุกคำขอโดยไม่ต้องกระจายโค้ด auth ไปทุก service
+  const token = typeof window === 'undefined' ? null : window.localStorage.getItem('campus-service-token');
   let response;
   try {
     response = await fetch(`${BASE_URL}${path}`, {
-      headers: { 'Content-Type': 'application/json', ...options.headers },
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...options.headers,
+      },
       ...options,
     });
   } catch {
