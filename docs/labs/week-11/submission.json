@@ -11,6 +11,6 @@
   "notes": "Checker passed 37/41; the optional video evidence is not included. Full-stack source is deployed as a Render Web Service. GitHub Pages provides the submission report and source link.",
   "pageUrl": "https://NekoAida.github.io/engse203-student-labs-68543210015-2/labs/week-11/",
   "sourceUrl": "https://github.com/NekoAida/engse203-student-labs-68543210015-2/tree/lab/week-11/labs/week-11/source",
-  "hasPublish": false,
+  "hasPublish": true,
   "sourceEntries": 12
 }
