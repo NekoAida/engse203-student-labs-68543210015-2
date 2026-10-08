@@ -1,0 +1,12 @@
+{
+  "week": "week-10",
+  "title": "Node.js Database Integration (node:sqlite)",
+  "status": "submitted",
+  "sourceOrigin": "course-starter",
+  "originalRepoUrl": "",
+  "originalCommit": "",
+  "pullRequestUrl": "",
+  "submissionTag": "",
+  "testStatus": "pass",
+  "notes": "API, frontend, database schema, and automated checks are present in this repository."
+}
