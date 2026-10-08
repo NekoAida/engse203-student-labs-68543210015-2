@@ -51,7 +51,9 @@ for (const week of labs) {
   pass.push(`${week} ${setupMode ? "setup structure/metadata/pages" : "structure/metadata/pages"}`);
 }
 
-const forbiddenNames = new Set([".git", "node_modules", ".env", ".env.local", ".env.production"]);
+// Week 11 requires committing frontend/.env.production: it contains only the
+// public production API base URL, not a secret. Keep private .env files banned.
+const forbiddenNames = new Set([".git", "node_modules", ".env", ".env.local"]);
 async function scanForbidden(directory) {
   if (!(await exists(directory))) return;
   for (const entry of await fs.readdir(directory, { withFileTypes: true })) {
