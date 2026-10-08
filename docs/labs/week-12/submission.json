@@ -8,9 +8,9 @@
   "pullRequestUrl": "https://github.com/NekoAida/engse203-student-labs-68543210015-2/pull/18",
   "submissionTag": "lab-12-submission-v1",
   "testStatus": "pass",
-  "notes": "Mandatory checker passed 20/20. Coverage and CI are optional challenges.",
+  "notes": "Mandatory checker passed 20/20. Coverage and CI are optional challenges. Full-stack source is deployed as a Render Web Service.",
   "pageUrl": "https://NekoAida.github.io/engse203-student-labs-68543210015-2/labs/week-12/",
   "sourceUrl": "https://github.com/NekoAida/engse203-student-labs-68543210015-2/tree/lab/week-12/labs/week-12/source",
-  "hasPublish": false,
+  "hasPublish": true,
   "sourceEntries": 17
 }

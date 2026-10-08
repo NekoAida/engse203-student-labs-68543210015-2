@@ -8,5 +8,5 @@
   "pullRequestUrl": "https://github.com/NekoAida/engse203-student-labs-68543210015-2/pull/19",
   "submissionTag": "lab-13-submission-v1",
   "testStatus": "pass",
-  "notes": "Mandatory checker passed 23/23. Render generates JWT_SECRET for production."
+  "notes": "Mandatory checker passed 23/23. Full-stack source is deployed as a Render Web Service with JWT_SECRET set in Render."
 }
